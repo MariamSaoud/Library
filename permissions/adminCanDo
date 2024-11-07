@@ -1,0 +1,10 @@
+const express=require('express')
+const User=require('../models/user');
+exports.adminCanDo=async(req,res,next)=>{
+    const id=req.id
+    const u=await User.findOne({_id:id})
+    if(u.role==='admin')
+        next()
+    else{
+        return res.status(400).json({message:"admin Can Do It Only!"})
+}}
